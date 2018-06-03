@@ -1,52 +1,40 @@
 <!DOCTYPE html>
-<html>
+html
 
-<head>
-	<title>Demo page</title>
-	<link rel="stylesheet" href="demo.css">
-	<link rel="stylesheet" href="pop.css">
-</head>
+ head
+  title Demo page
+  link(rel="stylesheet" href="css/demo.css")
+  link(rel="stylesheet" href="css/pop.css")
 
-<body>
-	<div class="contets">
-		<div class="qr">
-			<div id="qr">
-				
-			</div>
-			<a class="download button" href="#" download="#"><span class="icon-folder-download" title="QR Download"></span></a>
-		</div>
-		
-		<div class="textarea">
-			<textarea name="url" class="url"></textarea><br>
-		</div>
-		
-		<div class="history-list">
-			<ul>
-			</ul>
-		</div>
-		
-		<div class="ctrl">
-			<button class="bitly">bitly</button>
-			<button class="undo"><span class="icon-undo"></span></button>
-			<button class="copy" title="Copy"><span class="icon-copy"></span></button>
-			
-			<button class="history-clear" title="History clear"><span class="icon-history"></span>  Clear</button>
-			
-			<button class="history" title="History"><span class="icon-history"></span></button>
-			
-			<button class="back" title="History"><span class="icon-arrow-left2"></span></button>
-		</div>
-		
-		
-		
-		
-	</div>
+ body
+  .contets
+   .qr
+    #qr
+    a.download.button(href="#" download="#")
+     span.icon-folder-download(title="QR Download")
 
-	<script src="lib/jquery.min.js"></script>
-	<script src="lib/jquery.qrcode.min.js"></script>
-	<script src="popup.js"></script>
+   .textarea
+    textarea.url( name="url")
 
+   .history-list
+    ul
 
-</body>
+   .ctrl
+    button.bitly bitly
+    button.undo
+     span.icon-undo
+    button.copy(title="Copy")
+     span.icon-copy
 
-</html>
+    button.history-clear(title="History clear")
+     span.icon-history  Clear
+
+    button.history(title="History")
+     span.icon-history
+
+    button.back(title="History")
+     span.icon-arrow-left2
+
+  script(src="lib/jquery.min.js")
+  script(src="lib/jquery.qrcode.min.js")
+  script(src="js/popup.js")
