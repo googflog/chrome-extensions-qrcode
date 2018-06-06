@@ -122,7 +122,7 @@ $(function() {
     // 結果を表示
     convertBitly(url_val).done(function(d) {
       if (d.data.url) {
-        
+
         $('.bitly').hide();
         $('.undo').show();
         $('.copy').show();
@@ -134,7 +134,7 @@ $(function() {
         // $('textarea')[0].focus();
         $('textarea')[0].select();
       }else{
-
+        // :TODO 短縮URL生成に失敗した場合の表示を追加
       }
     });
   });
