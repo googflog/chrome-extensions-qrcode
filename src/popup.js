@@ -1,6 +1,26 @@
 $(function() {
   var url_val;
-  
+
+  var default_bitly_access_token = 'ebd7a67d641fb54e4c84e2571369de37bbb79a12';
+  var use_bitly_access_token = '';
+  var use_bitly_domain = '';
+
+  chrome.storage.sync.get({
+      bitly_access_token: '',
+      bitly_domain: 'bit.ly'
+      // 保存された値があったら、それを使う
+  }, function(items) {
+
+    if('' != items.bitly_access_token.length){
+      console.log("[ Load ]", items.bitly_access_token);
+      use_bitly_access_token=items.bitly_access_token;
+    }else{
+      console.log("[ NoLoad ]");
+      use_bitly_access_token=default_bitly_access_token;
+    }
+    use_bitly_domain=items.bitly_domain;
+  });
+
   //ロード時QR表示
   if(chrome.tabs){
     chrome.tabs.getSelected(null, function(tab) {
@@ -18,10 +38,10 @@ $(function() {
   function drawQr(val) {
     $('#qr').html('');
     $('#qr').qrcode(val);
-    
+
     //ドメインだけ取り出し
     var dluseurl = val.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
-    
+
     //画像ダウンロード用に変換
     var time = getDate();
     var imgData = $('canvas')[0].toDataURL();
@@ -37,7 +57,7 @@ $(function() {
       $(this).removeClass('expansion');
     }
   })
-  
+
   //日付取得
   function getDate(){
     var dt = new Date();
@@ -97,28 +117,32 @@ $(function() {
     // URLを取得し、url_val変数に代入
     url_val = $('textarea').val();
     // 短縮URL用ドメインを取得し、domain_val変数に代入
-    var domain_val = 'bit.ly';
+
 
     // 結果を表示
-    convertBitly(url_val, domain_val).done(function(d) {
-      $('.bitly').hide();
-      $('.undo').show();
-      $('.copy').show();
-      $('.url').addClass('bit-mode');
+    convertBitly(url_val).done(function(d) {
       if (d.data.url) {
+        
+        $('.bitly').hide();
+        $('.undo').show();
+        $('.copy').show();
+        $('.url').addClass('bit-mode');
+
         $('textarea').val(d.data.url);
         drawQr(d.data.url);
 
         // $('textarea')[0].focus();
         $('textarea')[0].select();
+      }else{
+
       }
     });
   });
 
   // Bitly APIにリクエスト
-  function convertBitly(url, domain) {
+  function convertBitly(url) {
     var encUrl = encodeURIComponent(url);
-    var bitly = "https://api-ssl.bitly.com/v3/shorten?access_token=f21eaf9abcfe1d1edfa78193041439c80db743bc&longUrl=" + encUrl + "&domain=" + domain;
+    var bitly = "https://api-ssl.bitly.com/v3/shorten?access_token="+use_bitly_access_token+"&longUrl=" + encUrl + "&domain=" + use_bitly_domain;
 
     var d = new $.Deferred();
 
@@ -162,7 +186,7 @@ $(function() {
   })
 
   $('.history-clear').on("click", function() {
-    localStorage.removeItem('qrqrqrqr');
+    localStorage.removeItem('qrcodeextensions12345');
     $('.history-list ul').html('');
   })
 
@@ -175,6 +199,7 @@ $(function() {
     $('.textarea').hide();
     $('.bitly').hide();
     $('.copy').hide();
+    $('.undo').hide();
     var historyListObj = histryLoad();
     historyListObj.reverse();
     if (historyListObj) {
@@ -184,10 +209,10 @@ $(function() {
       }
     }
   }
-  
-  
+
+
   function histryLoad() {
-    var getjson = localStorage.getItem('qrqrqrqr');
+    var getjson = localStorage.getItem('qrcodeextensions12345');
     if (getjson) {
       var historyListObj = JSON.parse(getjson);
       console.log(historyListObj);
@@ -218,7 +243,7 @@ $(function() {
       array.shift();
     }
     var setjson = JSON.stringify(array);
-    localStorage.setItem('qrqrqrqr', setjson);
+    localStorage.setItem('qrcodeextensions12345', setjson);
   }
 
 

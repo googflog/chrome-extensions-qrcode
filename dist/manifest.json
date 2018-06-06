@@ -1,16 +1,18 @@
 {
   "manifest_version": 2,
   "name": "QR CODE GENERATOR",
-  "version": "1.0",
+  "version": "1.1",
   "browser_action": {
     "default_icon": {
         "19": "images/icon19.png"
     },
     "default_popup": "popup.html"
   },
+  "options_page": "options.html",
   "permissions": [
     "tabs",
-    "clipboardWrite"
+    "clipboardWrite",
+    "storage"
   ],
   "content_security_policy":"script-src 'self' https://api-ssl.bitly.com; object-src 'self'"
 }
