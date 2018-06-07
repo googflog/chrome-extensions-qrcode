@@ -89,8 +89,14 @@ $(function() {
     drawQr(encodeURI($('textarea').val()));
     $('.bitly').show();
     $('.undo').hide();
-    $('.copy').hide();
     $('.url').removeClass('bit-mode');
+    
+    // if(url_val != $('textarea').val()){
+    //   $('.copy').show();
+    // }else{
+    //   $('.copy').hide();
+    // }
+    $('.copy').hide();
   })
 
   //URLコピー
@@ -170,6 +176,10 @@ $(function() {
     $('.qr').show();
     $('.textarea').show();
     $('.bitly').show();
+    $('.option').show();
+    if(url_val != $('textarea').val()){
+      // $('.copy').show();
+    }
   });
   $(document).on('click', '.history-list li', function() {
     $('.history-list').hide();
@@ -179,7 +189,8 @@ $(function() {
     $('.qr').show();
     $('.textarea').show();
     $('.bitly').show();
-    $('.copy').show();
+    // $('.copy').show();
+    $('.option').show();
     var url_val = $(this).data('obj');
     $('textarea').val(url_val);
     drawQr(encodeURI($('textarea').val()));
@@ -200,6 +211,7 @@ $(function() {
     $('.bitly').hide();
     $('.copy').hide();
     $('.undo').hide();
+    $('.option').hide();
     var historyListObj = histryLoad();
     historyListObj.reverse();
     if (historyListObj) {
@@ -247,6 +259,13 @@ $(function() {
   }
 
 
+  $('.option').on('click',function(){
+    if (chrome.runtime.openOptionsPage) {
+      chrome.runtime.openOptionsPage();
+    } else {
+      window.open(chrome.runtime.getURL('options.html'));
+    }
+  })
 
 
 

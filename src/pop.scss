@@ -88,6 +88,7 @@ body {
 
 .button,
 button {
+  
   padding: 8px;
   background: white;
   color: #666;
@@ -98,6 +99,9 @@ button {
   display: inline-block;
   // margin-bottom: 8px;
   transition: all 0 ease;
+  &.option{
+    // border: #fff 1px solid;
+  }
   cursor: pointer;
 
   * {
