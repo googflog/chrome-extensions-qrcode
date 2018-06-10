@@ -14,37 +14,39 @@ body {
   text-align: center;
   padding: 10px; }
 
-body {
-  background: #333;
-  color: #fff; }
-  body .option {
-    text-shadow: 1px 1px 1px #000;
-    max-width: 500px;
-    font-size: 17px;
-    line-height: 3em;
-    margin: 0 auto; }
-    body .option h1 {
-      margin: 1.5em 0 0.7em;
-      color: #fff;
-      border-bottom: 1px solid #fff;
-      font-weight: 200;
-      height: 75px; }
-      body .option h1 .version {
-        color: #ccc;
-        font-weight: 100;
-        font-size: 15px; }
-    body .option .checkboxBlock {
-      position: relative;
-      height: 60px; }
-    body .option input {
-      margin-left: 30px; }
-    body .option input[type=text] {
-      width: 300px; }
-    body .option label {
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      font-size: 19px;
-      font-weight: 100; }
+body .option {
+  max-width: 500px;
+  font-size: 17px;
+  line-height: 3em;
+  margin: 0 auto; }
+  body .option h1 {
+    margin: 1.5em 0 0.7em;
+    border-bottom: 1px solid #fff;
+    font-weight: 200;
+    height: 75px; }
+    body .option h1 .version {
+      color: #ccc;
+      font-weight: 100;
+      font-size: 15px; }
+  body .option .checkboxBlock {
+    position: relative;
+    height: 60px; }
+  body .option .group {
+    padding: 50px 0;
+    font-size: 12px; }
+  body .option h3 {
+    font-size: 15px; }
+  body .option input {
+    margin-left: 30px; }
+  body .option form {
+    padding: 1em 0; }
+  body .option input[type=text] {
+    width: 300px;
+    padding: 1em; }
+  body .option label {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: 100; }

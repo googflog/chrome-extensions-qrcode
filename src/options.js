@@ -2,6 +2,8 @@ $(function() {
 
     var default_bitly_access_token = 'ebd7a67d641fb54e4c84e2571369de37bbb79a12';
 
+    $(".version").append(chrome.runtime.getManifest().version);
+
     $('#bitly_access_token').on('keyup', function() {
 
         console.log("[ Save ]", $(this).val());

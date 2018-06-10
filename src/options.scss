@@ -21,13 +21,13 @@ body {
 
 
 body {
-	background: #333;
-	color: #fff;
+	// background: #333;
+	// color: #fff;
 
 	.option {
 		h1 {
 			margin: 1.5em 0 0.7em;
-			color: #fff;
+			// color: #fff;
 			border-bottom: 1px solid #fff;
 			font-weight: 200;
 			height: 75px;
@@ -38,7 +38,7 @@ body {
 				font-size: 15px;
 			}
 		}
-		text-shadow: 1px 1px 1px #000;
+		// text-shadow: 1px 1px 1px #000;
 		max-width: 500px;
 		font-size: 17px;
 		line-height: 3em;
@@ -48,13 +48,23 @@ body {
 			position: relative;
 			height: 60px;
 		}
-
+    .group{
+      padding: 50px 0;
+      font-size: 12px;
+    }
+    h3{
+      font-size: 15px;
+    }
 		input {
 			// display: none;
       margin-left: 30px;
 		}
+    form{
+      padding: 1em 0;
+    }
     input[type=text]{
       width: 300px;
+      padding: 1em;
     }
 
 		// input[type=checkbox] + label::before {
@@ -106,7 +116,7 @@ body {
 			// padding-left: 30px;
 			cursor: pointer;
 			user-select: none;
-			font-size: 19px;
+			// font-size: 19px;
 			font-weight: 100;
 		}
 	}

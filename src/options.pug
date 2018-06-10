@@ -7,27 +7,26 @@ html
 
  body
   .option
-   h1 QRCODE
-    span.version 
+   h1 QR CODE GENERATOR - Option 
+    span.version ver.
 
-    .bitly
-    h3 Bitly
-    
-    label(for="bitly_access_token") 
-    | Access Token
-    input(type="text" id="bitly_access_token" value="")
-    form
-     input(type="radio" id="type1" value="bit.ly" checked="checked" name="domain" )
-     label(for="type1")
-      | bit.ly
+    .bitly.group
+      h3 Bitly
       
-     input(type="radio" id="type2" value="j.mp" name="domain")
-     label(for="type2")
-      | j.mp
-      
-     input(type="radio" id="type3" value="bitly.com" name="domain")
-     label(for="type3")
-      | bitly.com
+      label(for="bitly_access_token") Access Token
+      input(type="text" id="bitly_access_token" value="")
+      form
+       input(type="radio" id="type1" value="bit.ly" checked="checked" name="domain" )
+       label(for="type1")
+        | bit.ly
+        
+       input(type="radio" id="type2" value="j.mp" name="domain")
+       label(for="type2")
+        | j.mp
+        
+       input(type="radio" id="type3" value="bitly.com" name="domain")
+       label(for="type3")
+        | bitly.com
 
   script(src="lib/jquery.min.js" type="text/javascript")
   script(src="js/options.js" type="text/javascript")

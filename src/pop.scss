@@ -51,7 +51,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   transition: all 0ms ease 0ms;
   &.expansion {
     width: 256px;
@@ -67,6 +67,13 @@ body {
   }
 }
 
+.alert{
+  color: orange;
+  font-weight: bold;
+  display: none;
+  line-height: 1.2em;
+  padding-bottom: 5px;
+}
 .ctrl {
   display: flex;
   justify-content: space-between;
@@ -88,7 +95,7 @@ body {
 
 .button,
 button {
-  
+
   padding: 8px;
   background: white;
   color: #666;

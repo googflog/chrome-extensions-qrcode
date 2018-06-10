@@ -76,6 +76,7 @@ $(function() {
     clearTimeout(timeoutid)
     timeoutid = setTimeout(function() {
       drawQr(encodeURI($('textarea').val()));
+      // drawQr($('textarea').val());
       $('.copy').show();
     }, 300);
   });
@@ -90,7 +91,7 @@ $(function() {
     $('.bitly').show();
     $('.undo').hide();
     $('.url').removeClass('bit-mode');
-    
+
     // if(url_val != $('textarea').val()){
     //   $('.copy').show();
     // }else{
@@ -141,9 +142,21 @@ $(function() {
         $('textarea')[0].select();
       }else{
         // :TODO 短縮URL生成に失敗した場合の表示を追加
+        Problem(changeUnderbarToSpace(d.status_txt));
       }
     });
   });
+
+  function changeUnderbarToSpace(val){
+    return val.replace(/_/g, ' ');
+  }
+  function Problem(val){
+    $('.alert').html(val).show();
+    var timeoutid = setTimeout(function() {
+      $('.alert').slideUp(400)
+    }, 3000 );
+
+  }
 
   // Bitly APIにリクエスト
   function convertBitly(url) {
