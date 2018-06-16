@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <title>QRCODE</title>
     <link rel="stylesheet" type="text/css" href="css/options.css" media="all">
+    <link rel="stylesheet" href="css/demo.css">
   </head>
   <body>
     <div class="option">
-      <h1>QR CODE GENERATOR - Option <span class="version">ver.</span>
+      <h1>QR CODE GENERATOR <span class="version">ver.</span>
         <div class="bitly group">
-          <h3>Bitly</h3>
+          <h3 class="group-ttl">Bitly</h3>
           <label for="bitly_access_token">Access Token</label>
           <input type="text" id="bitly_access_token" value="">
           <form>
@@ -20,6 +21,10 @@
             <input type="radio" id="type3" value="bitly.com" name="domain">
             <label for="type3">bitly.com</label>
           </form>
+        </div>
+        <div class="group">
+          <h3 class="group-ttl">Generate history</h3>
+          <button class="history-clear" title="History clear"><span class="icon-clock"> History remove</span></button>
         </div>
       </h1>
     </div>

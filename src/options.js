@@ -65,6 +65,28 @@ $(function() {
     restore_options();
 
 
+    if(!histryLoad()){
+      $('.history-clear').attr('disabled',true);
+    }
+    console.log(localStorage.getItem('qrcodeextensions12345'));
+    //
+    $('.history-clear').on("click", function() {
+      localStorage.removeItem('qrcodeextensions12345');
+      $('.history-list ul').html('');
+      $('.history-clear').attr('disabled',true);
+    })
+
+
+    function histryLoad() {
+      var getjson = localStorage.getItem('qrcodeextensions12345');
+      if (getjson) {
+        var historyListObj = JSON.parse(getjson);
+        console.log(historyListObj);
+        return historyListObj;
+      } else {
+        return false;
+      }
+    }
 
 })
 

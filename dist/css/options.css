@@ -1,10 +1,68 @@
+.button,
+button {
+  padding: 8px;
+  background: white;
+  color: #666;
+  border: #666 1px solid;
+  font-size: 14px;
+  border-radius: 2px;
+  text-decoration: none;
+  display: inline-block;
+  -webkit-transition: all 0 ease;
+  -o-transition: all 0 ease;
+  transition: all 0 ease;
+  cursor: pointer; }
+  .button *,
+  button * {
+    -webkit-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease; }
+  .button:enabled:hover,
+  button:enabled:hover {
+    color: white;
+    background: orange;
+    border: orange 1px solid; }
+  .button:disabled,
+  button:disabled {
+    opacity: 0.5; }
+
+textarea {
+  margin: 10px 0;
+  width: 100%;
+  padding: 0.3em 0.5em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  min-width: 150px;
+  height: 4em;
+  line-height: 1.4em;
+  -webkit-transition: all 300ms ease;
+  -o-transition: all 300ms ease;
+  transition: all 300ms ease;
+  border: 1px solid rgba(102, 102, 102, 0.2);
+  background: rgba(102, 102, 102, 0.2);
+  overflow: hidden;
+  border: none; }
+  textarea.click-open {
+    height: 6em; }
+  textarea:hover {
+    -webkit-box-shadow: inset 0 0 0 3px orange;
+    box-shadow: inset 0 0 0 3px orange; }
+  textarea.bit-mode:hover {
+    -webkit-box-shadow: inset 0 0 0 0 orange;
+    box-shadow: inset 0 0 0 0 orange;
+    background: orange; }
+
 * {
   margin: 0;
   padding: 0;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   outline: 0;
   tap-highlight-color: transparent;
   line-height: 1em;
+  -webkit-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
   transition: all 200ms ease-out; }
 
 body {
@@ -25,7 +83,7 @@ body .option {
     font-weight: 200;
     height: 75px; }
     body .option h1 .version {
-      color: #ccc;
+      color: rgba(102, 102, 102, 0.2);
       font-weight: 100;
       font-size: 15px; }
   body .option .checkboxBlock {
@@ -34,15 +92,22 @@ body .option {
   body .option .group {
     padding: 50px 0;
     font-size: 12px; }
-  body .option h3 {
-    font-size: 15px; }
+  body .option .group-ttl {
+    font-size: 15px;
+    margin-bottom: 20px; }
   body .option input {
     margin-left: 30px; }
   body .option form {
     padding: 1em 0; }
   body .option input[type=text] {
-    width: 300px;
+    width: 380px;
     padding: 1em; }
+    body .option input[type=text]::-moz-selection {
+      color: #fff;
+      background: orange; }
+    body .option input[type=text]::selection {
+      color: #fff;
+      background: orange; }
   body .option label {
     cursor: pointer;
     -webkit-user-select: none;

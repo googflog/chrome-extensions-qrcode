@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>QR CODE GENERATOR</title>
+    <link rel="stylesheet" href="css/perfect-scrollbar.css"/>
     <link rel="stylesheet" href="css/demo.css"/>
     <link rel="stylesheet" href="css/pop.css"/>
   </head>
@@ -15,20 +16,23 @@
         <textarea class="url" name="url"></textarea>
       </div>
       <div class="history-list">
-        <ul></ul>
+        <div>
+          <ul></ul>
+        </div>
       </div>
       <div class="ctrl">
         <button class="bitly">bitly</button>
         <button class="undo"><span class="icon-undo"></span></button>
         <button class="copy" title="Copy"><span class="icon-copy"></span></button>
         <button class="option" title="Option"><span class="icon-cog"></span></button>
-        <button class="history-clear" title="History clear"><span class="icon-history"> Clear</span></button>
-        <button class="history" title="History"><span class="icon-history"></span></button>
+        <button class="history" title="History"><span class="icon-clock"></span></button>
         <button class="back" title="Back"><span class="icon-arrow-left2"></span></button>
       </div>
     </div>
     <script src="lib/jquery.min.js"></script>
     <script src="lib/jquery.qrcode.min.js"></script>
+    <script src="lib/perfect-scrollbar.min.js"></script>
+    <script src="js/_history.js"></script>
     <script src="js/popup.js"></script>
   </body>
 </html>

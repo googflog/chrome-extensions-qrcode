@@ -3,6 +3,7 @@ html
 
  head
   title QR CODE GENERATOR
+  link(rel="stylesheet" href="css/perfect-scrollbar.css")
   link(rel="stylesheet" href="css/demo.css")
   link(rel="stylesheet" href="css/pop.css")
 
@@ -17,7 +18,8 @@ html
     textarea.url( name="url")
 
    .history-list
-    ul
+     div
+       ul
 
    .ctrl
     button.bitly bitly
@@ -29,15 +31,17 @@ html
     button.option(title="Option")
      span.icon-cog
 
-    button.history-clear(title="History clear")
-     span.icon-history  Clear
+    //- button.history-clear(title="History clear")
+    //-  span.icon-clock  Clear
 
     button.history(title="History")
-     span.icon-history
+     span.icon-clock
 
     button.back(title="Back")
      span.icon-arrow-left2
 
   script(src="lib/jquery.min.js")
   script(src="lib/jquery.qrcode.min.js")
+  script(src="lib/perfect-scrollbar.min.js")
+  script(src="js/_history.js")
   script(src="js/popup.js")

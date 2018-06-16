@@ -1,3 +1,5 @@
+
+
 $(function() {
   var url_val;
 
@@ -26,7 +28,7 @@ $(function() {
     chrome.tabs.getSelected(null, function(tab) {
       drawQr(tab.url);
       $('textarea').val(decodeURI(tab.url));
-      historySave($('textarea').val())
+      historySave($('textarea').val(),tab.title)
     });
   }else{
     $('#qr').qrcode(window.location.href);
@@ -104,6 +106,7 @@ $(function() {
   $('.copy').on("click", function() {
     execCopy();
   })
+
   function execCopy(string) {
     $('textarea').focus();
     $('textarea').select();
@@ -189,7 +192,7 @@ $(function() {
     $('.qr').show();
     $('.textarea').show();
     $('.bitly').show();
-    $('.option').show();
+    $('.option').hide();
     if(url_val != $('textarea').val()){
       // $('.copy').show();
     }
@@ -203,16 +206,13 @@ $(function() {
     $('.textarea').show();
     $('.bitly').show();
     // $('.copy').show();
-    $('.option').show();
+    $('.option').hide();
     var url_val = $(this).data('obj');
     $('textarea').val(url_val);
     drawQr(encodeURI($('textarea').val()));
   })
 
-  $('.history-clear').on("click", function() {
-    localStorage.removeItem('qrcodeextensions12345');
-    $('.history-list ul').html('');
-  })
+
 
   function historyListShow() {
     $('.history-list').show();
@@ -224,13 +224,13 @@ $(function() {
     $('.bitly').hide();
     $('.copy').hide();
     $('.undo').hide();
-    $('.option').hide();
+    $('.option').show();
     var historyListObj = histryLoad();
     historyListObj.reverse();
     if (historyListObj) {
       $('.history-list ul').html('');
       for (var item in historyListObj) {
-        $('.history-list ul').append('<li data-obj="' + historyListObj[item] + '">' + historyListObj[item] + '</li>')
+        $('.history-list ul').append('<li data-obj="' + historyListObj[item].url + '"><dl><dt>' + historyListObj[item].title + '</dt><dd>'+historyListObj[item].url+'</dd></dl></li>')
       }
     }
   }
@@ -247,22 +247,21 @@ $(function() {
     }
   }
 
-  function historySave(str) {
+  function historySave(url,title) {
     var historyListObj = histryLoad();
     var array = [];
     console.log("historyListObj", historyListObj)
     var sameURL = false;
     if (historyListObj) {
-      console.log("historyListObj", historyListObj)
       for (var item in historyListObj) {
-        array.push(historyListObj[item]);
-        if (str == historyListObj[item]) {
+        array.push({url:historyListObj[item].url,title:historyListObj[item].title,date:historyListObj[item].date});
+        if (url == historyListObj[item].url) {
           sameURL = true;
         }
       }
     }
     if (!sameURL) {
-      array.push(str);
+      array.push({url:url,title:title,date:new Date()});
     }
     if (30 < array.length) {
       array.shift();
@@ -280,6 +279,12 @@ $(function() {
     }
   })
 
+
+  const ps = new PerfectScrollbar('.history-list', {
+    // wheelSpeed: 2,
+    // wheelPropagation: true,
+    // minScrollbarLength: 20
+  });
 
 
 

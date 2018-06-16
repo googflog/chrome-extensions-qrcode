@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+$SELECTCOLR : orange;
+$TEXTCOLOR : #666;
+
+.button,
+button {
+
+  padding: 8px;
+  background: white;
+  color: $TEXTCOLOR;
+  border: $TEXTCOLOR 1px solid;
+  font-size: 14px;
+  border-radius: 2px;
+  text-decoration: none;
+  display: inline-block;
+  // margin-bottom: 8px;
+  transition: all 0 ease;
+  &.option{
+    // border: #fff 1px solid;
+  }
+  cursor: pointer;
+
+  * {
+    transition: all 300ms ease;
+  }
+  &:enabled{
+    &:hover {
+      color: white;
+      background: $SELECTCOLR;
+      border: rgba($SELECTCOLR,1) 1px solid;
+    }
+  }
+  &:disabled{
+    opacity: 0.5;
+  }
+}
+
+textarea {
+  margin: 10px 0;
+  width: 100%;
+  padding: 0.3em 0.5em;
+  appearance: none;
+  min-width: 150px;
+  height: 4em;
+  line-height: 1.4em;
+  transition: all 300ms ease;
+  border: 1px solid rgba($TEXTCOLOR,0.2);
+  background: rgba($TEXTCOLOR,0.2);
+  overflow: hidden;
+  border: none;
+
+  &:focus {
+    // height: 6em;
+  }
+
+  &.click-open {
+    height: 6em;
+  }
+
+  &:hover {
+    box-shadow: inset 0 0 0 3px $SELECTCOLR;
+  }
+
+  &.bit-mode {
+    &:focus {
+      // height: 5em;
+    }
+
+    &:hover {
+      box-shadow: inset 0 0 0 0 $SELECTCOLR;
+      background: $SELECTCOLR;
+    }
+  }
+}
