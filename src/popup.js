@@ -53,10 +53,10 @@ $(function() {
 
   //QRコードを拡大
   $(document).on('click', '#qr', function() {
-    if (!$(this).hasClass('expansion')) {
-      $(this).addClass('expansion');
+    if (!$('.contets').hasClass('expansion')) {
+      $('.contets').addClass('expansion');
     } else {
-      $(this).removeClass('expansion');
+      $('.contets').removeClass('expansion');
     }
   })
 
@@ -185,45 +185,48 @@ $(function() {
     historyListShow();
   });
   $('.back').on("click", function() {
-    $('.history-list').hide();
-    $('.back').hide();
-    $('.history-clear').hide();
-    $('.history').show();
-    $('.qr').show();
-    $('.textarea').show();
-    $('.bitly').show();
-    $('.option').hide();
+    // $('.history-list').hide();
+    // $('.back').hide();
+    // $('.history-clear').hide();
+    // $('.history').show();
+    // $('.qr').show();
+    // $('.textarea').show();
+    // $('.bitly').show();
+    // $('.option').hide();
     if(url_val != $('textarea').val()){
       // $('.copy').show();
     }
+    $('.contets_inline').removeClass('history');
   });
   $(document).on('click', '.history-list li', function() {
-    $('.history-list').hide();
-    $('.back').hide();
-    $('.history-clear').hide();
-    $('.history').show();
-    $('.qr').show();
-    $('.textarea').show();
-    $('.bitly').show();
+    // $('.history-list').hide();
+    // $('.back').hide();
+    // $('.history-clear').hide();
+    // $('.history').show();
+    // $('.qr').show();
+    // $('.textarea').show();
+    // $('.bitly').show();
     // $('.copy').show();
-    $('.option').hide();
+    // $('.option').hide();
     var url_val = $(this).data('obj');
     $('textarea').val(url_val);
     drawQr(encodeURI($('textarea').val()));
+    $('.contets_inline').removeClass('history');
   })
 
 
 
   function historyListShow() {
+    $('.contets_inline').addClass('history');
     $('.history-list').show();
     $('.back').show();
     $('.history-clear').show();
-    $('.history').hide();
-    $('.qr').hide();
-    $('.textarea').hide();
-    $('.bitly').hide();
-    $('.copy').hide();
-    $('.undo').hide();
+    // $('.history').hide();
+    // $('.qr').hide();
+    // $('.textarea').hide();
+    // $('.bitly').hide();
+    // $('.copy').hide();
+    // $('.undo').hide();
     $('.option').show();
     var historyListObj = histryLoad();
     historyListObj.reverse();

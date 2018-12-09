@@ -9,36 +9,47 @@ html
 
  body
   .contets
-   .qr
-    #qr
-    a.download.button(href="#" download="#")
-     span.icon-folder-download(title="QR Download")
-   .alert
-   .textarea
-    textarea.url( name="url")
+    .contets_scroll
+     .contets_inline
+       .qr
+        .qr_wrap
+          #qr
+          a.download.button(href="#" download="#" title="Download")
+            +download
+            //- span.icon-folder-download(title="QR Download")
+        .alert
+        .textarea
+         textarea.url(name="url")
+        .ctrl
+          button.bitly(title="bitly")
+            +bitly
+          button.undo(title="Undo")
+            +undo
+          button.history(title="History")
+           +history
 
-   .history-list
-     div
-       ul
 
-   .ctrl
-    button.bitly bitly
-    button.undo
-     span.icon-undo
-    button.copy(title="Copy")
-     span.icon-copy
-       
-    button.option(title="Option")
-     span.icon-cog
 
-    //- button.history-clear(title="History clear")
-    //-  span.icon-clock  Clear
+       .history_block
+         .history-list
+           div
+             ul
+         .ctrl
+           button.back(title="Back")
+             span.icon-arrow-left2
+           button.option(title="Option")
+             +option
+     //- .ctrl
 
-    button.history(title="History")
-     span.icon-clock
+         
 
-    button.back(title="Back")
-     span.icon-arrow-left2
+      //- button.history-clear(title="History clear")
+      //-  span.icon-clock  Clear
+
+
+
+      button.back(title="Back")
+       span.icon-arrow-left2
 
   script(src="lib/jquery.min.js")
   script(src="lib/jquery.qrcode.min.js")

@@ -1,0 +1,153 @@
+@charset "UTF-8";
+
+
+button.history {
+  background: #ccc;
+  border: 1px solid #ccc;
+
+  &:enabled:hover {
+    border: 1px solid $TEXTCOLOR;
+    color: $TEXTCOLOR;
+
+    .fill-color {
+      fill: $TEXTCOLOR;
+    }
+  }
+}
+
+.button.download,
+button.download {
+  background: #ccc;
+  border: 1px solid #ccc;
+
+  &:enabled:hover {
+    border: 1px solid $DOWNLOAD;
+    color: $DOWNLOAD;
+      background: white;
+
+    .fill-color {
+      fill: $DOWNLOAD;
+    }
+  }
+}
+
+button.bitly {
+  width: 32px;
+  height: 32px;
+  background: $BITLY;
+  border: 1px solid $BITLY;
+
+  .fill-color {
+    fill: white;
+  }
+
+  &:enabled:hover {
+    border: 1px solid $BITLY;
+
+    .fill-color {
+      fill: $BITLY;
+    }
+  }
+}
+
+.qr {
+  // position: absolute;
+  // width: 160px;
+
+  padding: 10px 10px 43px 10px;
+  position: relative;
+
+  &:hover {
+    // box-shadow: 0 0 0 2px rgba($SELECTCOLR,1);
+  }
+  // position: relative;
+
+  .download {
+    box-shadow: 0 0 0 3px rgba(white,1);
+    opacity: 0;
+    position: absolute;
+    bottom: 0px;
+    margin: auto;
+    right: 0px;
+    left: 0px;
+    top: 0;
+    bottom: 0;
+    visibility: hidden;
+    // top:0;
+    // left:0;
+    // bottom:0;
+    // right:0;
+    // margin:auto;
+    // width: 2.5em;
+  }
+}
+
+.qr_wrap {
+  position: relative;
+  cursor: pointer;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center; /* 子要素をflexboxにより中央に配置する */
+  //   align-items: center;
+  margin-bottom: 10px;
+  &:hover {
+    .download {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+#qr {
+  font-size: 0;
+  width: 140px;
+  height: 140px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0 ease 0;
+
+  &:hover {
+    box-shadow: 0 0 0 1px rgba($TEXTCOLOR,0.5);
+    //
+    // .download {
+    //   opacity: 1;
+    // }
+  }
+
+  // &.expansion {
+  //   width: 256px;
+  //   height: 256px;
+  //
+  //   canvas {
+  //     width: 156px;
+  //   }
+  // }
+
+  canvas {
+    width: 100px;
+    transition: all 300ms ease 200ms;
+  }
+}
+
+.alert {
+  color: $SELECTCOLR;
+  font-weight: bold;
+  display: none;
+  line-height: 1.2em;
+  padding-bottom: 5px;
+}
+
+
+.undo {
+  display: none;
+}
+
+.copy {
+  display: none;
+}
