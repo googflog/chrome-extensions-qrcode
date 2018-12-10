@@ -10,8 +10,9 @@
   display: none;
 }
 .history_block{
-
   padding: 10px 10px 43px 10px;
+  width: 160px;
+  width: 100%;
   position: relative;
 }
 .history-list {
@@ -38,6 +39,7 @@
     &:hover {
       color: white;
       background: $SELECTCOLR;
+      background: #ccc;
 
       dl {
         dt {

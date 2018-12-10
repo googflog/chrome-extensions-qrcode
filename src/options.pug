@@ -1,3 +1,4 @@
+include ./_popup_icons
 doctype html
 html
  head
@@ -30,10 +31,12 @@ html
         | bitly.com
         
     .group
-      h3.group-ttl Generate history
+      h3.group-ttl
+        +history
+        span History setting
       
-      button.history-clear(title="History clear")
-       span.icon-clock  History remove
+      a.history-clear(href="#" title="History clear")
+        span History remove
 
   script(src="lib/jquery.min.js" type="text/javascript")
   script(src="js/options.js" type="text/javascript")
