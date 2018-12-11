@@ -3,12 +3,22 @@ button {
   width: 33px;
   height: 33px;
   background: white;
+  font-size: 0;
+  line-height: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   vertical-align: middle;
   background: #ccc;
   border: #ccc 1px solid;
   stroke: white;
   color: white;
-  font-size: 14px;
   border-radius: 50%;
   text-decoration: none;
   display: inline-block;
@@ -28,13 +38,7 @@ button {
   .button svg,
   button svg {
     width: 14px;
-    height: 14px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto; }
+    height: 14px; }
   .button:enabled .st0,
   button:enabled .st0 {
     fill: none;
@@ -117,7 +121,8 @@ body .option {
     body .option h1 .version {
       color: rgba(102, 102, 102, 0.2);
       font-weight: 100;
-      font-size: 15px; }
+      font-size: 15px;
+      margin-left: 0.5em; }
   body .option .checkboxBlock {
     position: relative;
     height: 60px; }
@@ -126,7 +131,9 @@ body .option {
     font-size: 12px; }
   body .option .group-ttl {
     font-size: 15px;
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    fill: none;
+    stroke: #000; }
   body .option input {
     margin-left: 30px; }
   body .option form {
@@ -147,6 +154,14 @@ body .option {
     -ms-user-select: none;
     user-select: none;
     font-weight: 100; }
+
+body .note {
+  margin-top: 2em;
+  line-height: 1.6em;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-indent: -1.5em;
+  padding-left: 1.5em; }
 
 body h3 svg {
   width: 15px;
