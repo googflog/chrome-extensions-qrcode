@@ -3,12 +3,22 @@ button {
   width: 33px;
   height: 33px;
   background: white;
+  font-size: 0;
+  line-height: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   vertical-align: middle;
   background: #ccc;
   border: #ccc 1px solid;
   stroke: white;
   color: white;
-  font-size: 14px;
   border-radius: 50%;
   text-decoration: none;
   display: inline-block;
@@ -28,13 +38,7 @@ button {
   .button svg,
   button svg {
     width: 14px;
-    height: 14px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto; }
+    height: 14px; }
   .button:enabled .st0,
   button:enabled .st0 {
     fill: none;
@@ -87,7 +91,9 @@ textarea {
 
 button.history {
   background: #ccc;
-  border: 1px solid #ccc; }
+  border: 1px solid #ccc;
+  line-height: 0;
+  font-size: 0; }
   button.history .st0 {
     fill: none;
     stroke: white; }
@@ -150,7 +156,16 @@ button.bitly {
   margin-bottom: 10px; }
   .qr_wrap:hover .download {
     visibility: visible;
-    opacity: 1; }
+    opacity: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
 
 #qr {
   font-size: 0;

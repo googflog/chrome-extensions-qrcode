@@ -13,6 +13,11 @@ button {
   width: 33px;
   height: 33px;
   background: white;
+  font-size: 0;
+  line-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   // overflow: hidden;
   // display: flex;
   // flex-direction: column;
@@ -27,16 +32,12 @@ button {
   border: #ccc 1px solid;
   stroke: white;
   color: white;
-  font-size: 14px;
+  // font-size: 14px;
   border-radius: 50%;
   text-decoration: none;
   display: inline-block;
-  // margin-bottom: 8px;
-  // transition: all 0 ease;
-  // transition: all 300ms ease;
-  &.option {
-    // border: #fff 1px solid;
-  }
+
+
 
   span {
     vertical-align: middle;
@@ -58,12 +59,12 @@ button {
   svg {
     width: 14px;
     height: 14px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    // bottom: 0;
+    // right: 0;
+    // margin: auto;
   }
 
   &:enabled {

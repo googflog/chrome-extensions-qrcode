@@ -3,6 +3,8 @@
 button.history {
   background: #ccc;
   border: 1px solid #ccc;
+    line-height: 0;
+    font-size: 0;
 
   .st0 {
     fill: none;
@@ -102,6 +104,9 @@ button.bitly {
     .download {
       visibility: visible;
       opacity: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

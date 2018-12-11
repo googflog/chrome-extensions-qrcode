@@ -29,7 +29,7 @@ html
           button.copy(title="Copy")
             +copy
           button.history(title="History")
-           +history
+            +history
 
 
 
@@ -39,20 +39,10 @@ html
              ul
          .ctrl
            button.back(title="Back")
-             span.icon-arrow-left2
+             +arrow
            button.option(title="Option")
              +option
-     //- .ctrl
 
-         
-
-      //- button.history-clear(title="History clear")
-      //-  span.icon-clock  Clear
-
-
-
-      button.back(title="Back")
-       span.icon-arrow-left2
 
   script(src="lib/jquery.min.js")
   script(src="lib/jquery.qrcode.min.js")
