@@ -1,0 +1,8 @@
+{
+   "extName": {
+      "message": "Quick Get QR & Short URL"
+   },
+   "optionNote": {
+      "message": "! 주의! 브라우저의 Cookie와 캐시 된 데이터를 삭제하면 Access Token 설정도 삭제됩니다."
+   }
+}

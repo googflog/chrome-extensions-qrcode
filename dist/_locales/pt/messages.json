@@ -1,0 +1,8 @@
+{
+   "extName": {
+      "message": "Quick Get QR & Short URL"
+   },
+   "optionNote": {
+      "message": "! Cuidado! Se você limpar o cookie e os dados em cache do navegador, a configuração [Access Token] também será apagada."
+   }
+}

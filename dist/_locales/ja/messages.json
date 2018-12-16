@@ -1,0 +1,8 @@
+{
+   "extName": {
+      "message": "Quick Get QR & Short URL"
+   },
+   "optionNote": {
+      "message": "※ 注意 Chromeの[設定]において[閲覧履歴データを消去する]で[Cookieと他のサイトのデータ]にチェックを入れて[データ消去]すると、この機能拡張上の[Access Token]の設定も消去されます。"
+   }
+}
