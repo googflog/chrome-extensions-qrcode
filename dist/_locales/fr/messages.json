@@ -1,0 +1,8 @@
+{
+   "extName": {
+      "message": "Obtenir rapidement l'URL QR & Short"
+   },
+   "optionNote": {
+      "message": "! Attention! Si vous effacez le cookie du navigateur et les données mises en cache, le paramètre [Access Token] sera également supprimé."
+   }
+}

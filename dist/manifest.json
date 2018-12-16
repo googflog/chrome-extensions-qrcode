@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Quick Get QR & Short URL",
-  "version": "1.4",
+  "name": "__MSG_extName__",
+  "version": "1.5",
   "browser_action": {
     "default_icon": {
         "19": "images/icon19.png"
@@ -9,6 +9,7 @@
     "default_popup": "popup.html"
   },
   "options_page": "options.html",
+  "default_locale": "ja",
   "permissions": [
     "tabs",
     "clipboardWrite",
