@@ -74,31 +74,19 @@ $(function() {
 
   //キーボードでURLを修正した
   var timeoutid;
-  // function ja2Bit ( str ) {
-  //   return ( str.match(/^[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]+$/g) )? true : false
-  // }
   $('textarea').on('keydown', function(e) {
     clearTimeout(timeoutid)
     timeoutid = setTimeout(function() {
 
-
       var str = $('textarea').val().toString();
-      // console.log( str , str.match(/[^\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]/) )
-      // && str.indexOf('://')!=-1
       if(str.match(/[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]/)){
-        // console.log("JP",str)
+        console.log("JP",str)
         str = Encoding.convert(str, 'SJIS');
         drawQr(str);
       }else{
-        // console.log("EN",str)
+        console.log("EN",str)
         drawQr(encodeURI(str));
-        drawQr(str);
       }
-
-      // console.log($('textarea').val())
-
-      // drawQr(encodeURI($('textarea').val()));
-      // drawQr($('textarea').val());
       $('.copy').show();
     }, 300);
   });
