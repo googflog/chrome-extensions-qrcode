@@ -1,67 +1,188 @@
-
-
 $(function() {
   var url_val;
 
-  var default_bitly_access_token = 'ebd7a67d641fb54e4c84e2571369de37bbb79a12';
-  var use_bitly_access_token = '';
-  var use_bitly_domain = '';
+  /**
+   * 初期値のアクセストークン
+   */
+  var default_bitly_access_token = "ebd7a67d641fb54e4c84e2571369de37bbb79a12";
 
-  chrome.storage.sync.get({
-      bitly_access_token: '',
-      bitly_domain: 'bit.ly'
-      // 保存された値があったら、それを使う
-  }, function(items) {
+  /**
+   * 利用するアクセストークン、最終的にユーザーの設定値か初期値のどちらかが入る
+   */
+  var use_bitly_access_token = "";
 
-    if('' != items.bitly_access_token.length){
-      console.log("[ Load ]", items.bitly_access_token);
-      use_bitly_access_token=items.bitly_access_token;
-    }else{
-      console.log("[ NoLoad ]");
-      use_bitly_access_token=default_bitly_access_token;
+  /**
+   * bitlyのドメイン名
+   */
+  var use_bitly_domain = "";
+
+  chrome.storage.sync.get(
+    {
+      bitly_access_token: "",
+      bitly_domain: "bit.ly"
+      // 保存された値があったら使う
+    },
+    function(items) {
+      if ("" != items.bitly_access_token.length) {
+        console.log("[ Load ]", items.bitly_access_token);
+        use_bitly_access_token = items.bitly_access_token;
+      } else {
+        console.log("[ NoLoad ]");
+        use_bitly_access_token = default_bitly_access_token;
+      }
+      use_bitly_domain = items.bitly_domain;
     }
-    use_bitly_domain=items.bitly_domain;
-  });
+  );
 
   //ロード時QR表示
-  if(chrome.tabs){
+  if (chrome.tabs) {
     chrome.tabs.getSelected(null, function(tab) {
       drawQr(tab.url);
-      $('textarea').val(decodeURI(tab.url));
-      historySave($('textarea').val(),tab.title)
+      $("textarea").val(decodeURI(tab.url));
+      historySave($("textarea").val(), tab.title);
     });
-  }else{
-    $('#qr').qrcode(window.location.href);
-    $('textarea').val(decodeURI(window.location.href));
+  } else {
+    $("#qr").qrcode(window.location.href);
+    $("textarea").val(decodeURI(window.location.href));
   }
 
+  //QRコードを拡大
+  $(document).on("click", "#qr", function() {
+    if (!$(".contets").hasClass("expansion")) {
+      $(".contets").addClass("expansion");
+    } else {
+      $(".contets").removeClass("expansion");
+    }
+  });
 
-  //QRを描画
+  //キーボードでURLを修正した
+  var timeoutid;
+  $("textarea").on("keydown", function(e) {
+    clearTimeout(timeoutid);
+    timeoutid = setTimeout(function() {
+      var str = $("textarea")
+        .val()
+        .toString();
+      if (str.match(/[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]/)) {
+        console.log("JP", str);
+        str = Encoding.convert(str, "SJIS");
+        drawQr(str);
+      } else {
+        console.log("EN", str);
+        drawQr(encodeURI(str));
+      }
+      $(".copy").show();
+    }, 300);
+  });
+
+  $("textarea").on("click", function(e) {
+    $(this).addClass("click-open");
+  });
+
+  //元のURLに戻す
+  $(".undo").on("click", function() {
+    $("textarea").val(url_val);
+    drawQr(encodeURI($("textarea").val()));
+    $(".bitly").show();
+    $(".undo").hide();
+    $(".url").removeClass("bit-mode");
+
+    $(".copy").hide();
+  });
+
+  //URLコピー
+  $(".copy").on("click", function() {
+    if (execCopy($("textarea").val())) {
+      Problem("COPYED!");
+    } else {
+      Problem("COPY FAILURE!");
+    }
+  });
+
+  //短縮URLにする
+  $(".bitly").on("click", function() {
+    // URLを取得し、url_val変数に代入
+    url_val = $("textarea").val();
+
+    // 結果を表示
+    convertBitly(url_val).done(function(d) {
+      if (d.data.url) {
+        $(".bitly").hide();
+        $(".undo").show();
+        $(".copy").show();
+        $(".url").addClass("bit-mode");
+
+        $("textarea").val(d.data.url);
+        drawQr(d.data.url);
+
+        $("textarea")[0].select();
+      } else {
+        //短縮URL生成に失敗した場合の表示
+        Problem(changeUnderbarToSpace(d.status_txt));
+      }
+    });
+  });
+
+  // 履歴表示ボタン
+  $(".history").on("click", function() {
+    $(".contets_inline").addClass("history");
+    $(".history-list").show();
+    $(".back").show();
+    $(".history-clear").show();
+    $(".option").show();
+    historyListShow();
+  });
+
+  // 戻るボタン
+  $(".back").on("click", function() {
+    $(".contets_inline").removeClass("history");
+  });
+
+  // 履歴リスト
+  $(document).on("click", ".history-list li", function() {
+    var url_val = $(this).data("obj");
+    $("textarea").val(url_val);
+    drawQr(encodeURI($("textarea").val()));
+    $(".contets_inline").removeClass("history");
+  });
+
+  // オプション表示ボタン
+  $(".option").on("click", function() {
+    if (chrome.runtime.openOptionsPage) {
+      chrome.runtime.openOptionsPage();
+    } else {
+      window.open(chrome.runtime.getURL("options.html"));
+    }
+  });
+
+  var ps = new PerfectScrollbar(".history-list", {
+    // wheelSpeed: 2,
+    // wheelPropagation: true,
+    // minScrollbarLength: 20
+  });
+
+  /**
+   * QRを描画
+   * @param {string} val
+   */
   function drawQr(val) {
-    $('#qr').html('');
-    $('#qr').qrcode(val);
+    $("#qr").html("");
+    $("#qr").qrcode(val);
 
     //ドメインだけ取り出し
     var dluseurl = val.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
 
     //画像ダウンロード用に変換
     var time = getDate();
-    var imgData = $('canvas')[0].toDataURL();
-    $('.download').attr('href', imgData);
-    $('.download').attr('download', 'qr-' + time + '-' + dluseurl + '.png');
+    var imgData = $("canvas")[0].toDataURL();
+    $(".download").attr("href", imgData);
+    $(".download").attr("download", "qr-" + time + "-" + dluseurl + ".png");
   }
 
-  //QRコードを拡大
-  $(document).on('click', '#qr', function() {
-    if (!$('.contets').hasClass('expansion')) {
-      $('.contets').addClass('expansion');
-    } else {
-      $('.contets').removeClass('expansion');
-    }
-  })
-
-  //日付取得
-  function getDate(){
+  /**
+   * 日付取得
+   */
+  function getDate() {
     var dt = new Date();
     var year = dt.getFullYear().toString();
     var month = (dt.getMonth() + 1).toString();
@@ -72,107 +193,75 @@ $(function() {
     return year + month + date + hours + minutes + seconds;
   }
 
-  //キーボードでURLを修正した
-  var timeoutid;
-  $('textarea').on('keydown', function(e) {
-    clearTimeout(timeoutid)
-    timeoutid = setTimeout(function() {
-
-      var str = $('textarea').val().toString();
-      if(str.match(/[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]/)){
-        console.log("JP",str)
-        str = Encoding.convert(str, 'SJIS');
-        drawQr(str);
-      }else{
-        console.log("EN",str)
-        drawQr(encodeURI(str));
-      }
-      $('.copy').show();
-    }, 300);
-  });
-  $('textarea').on('click', function(e) {
-    $(this).addClass("click-open");
-  });
-
-  //元のURLに戻す
-  $('.undo').on("click", function() {
-    $('textarea').val(url_val);
-    drawQr(encodeURI($('textarea').val()));
-    $('.bitly').show();
-    $('.undo').hide();
-    $('.url').removeClass('bit-mode');
-
-    // if(url_val != $('textarea').val()){
-    //   $('.copy').show();
-    // }else{
-    //   $('.copy').hide();
-    // }
-    $('.copy').hide();
-  })
-
-  //URLコピー
-  $('.copy').on("click", function() {
-    execCopy();
-  })
-
+  /**
+   * フォームの内容をクリップボードにコピー
+   * @param {string} string
+   */
   function execCopy(string) {
-    $('textarea').focus();
-    $('textarea').select();
-    // // クリップボードにコピーします。
-    var succeeded = document.execCommand('copy');
-    if (succeeded) {
-      // コピーに成功した場合の処理です。
-      console.log('コピーが成功しました！');
-    } else {
-      // コピーに失敗した場合の処理です。
-      console.log('コピーが失敗しました!');
-    }
+    // 空div 生成
+    var tmp = document.createElement("div");
+    // 選択用のタグ生成
+    var pre = document.createElement("pre");
+
+    // 親要素のCSSで user-select: none だとコピーできないので書き換える
+    pre.style.webkitUserSelect = "auto";
+    pre.style.userSelect = "auto";
+
+    tmp.appendChild(pre).textContent = string;
+
+    // 要素を画面外へ
+    var s = tmp.style;
+    s.position = "fixed";
+    s.right = "200%";
+
+    // body に追加
+    document.body.appendChild(tmp);
+    // 要素を選択
+    document.getSelection().selectAllChildren(tmp);
+
+    // クリップボードにコピー
+    var result = document.execCommand("copy");
+
+    // 要素削除
+    document.body.removeChild(tmp);
+
+    return result;
   }
 
-
-  //短縮URLにする
-  $('.bitly').on("click", function() {
-    // URLを取得し、url_val変数に代入
-    url_val = $('textarea').val();
-    // 短縮URL用ドメインを取得し、domain_val変数に代入
-
-
-    // 結果を表示
-    convertBitly(url_val).done(function(d) {
-      if (d.data.url) {
-
-        $('.bitly').hide();
-        $('.undo').show();
-        $('.copy').show();
-        $('.url').addClass('bit-mode');
-
-        $('textarea').val(d.data.url);
-        drawQr(d.data.url);
-
-        // $('textarea')[0].focus();
-        $('textarea')[0].select();
-      }else{
-        // :TODO 短縮URL生成に失敗した場合の表示を追加
-        Problem(changeUnderbarToSpace(d.status_txt));
-      }
-    });
-  });
-
-  function changeUnderbarToSpace(val){
-    return val.replace(/_/g, ' ');
+  /**
+   * "_" を " " に置き換え
+   * @param {string} val
+   */
+  function changeUnderbarToSpace(val) {
+    return val.replace(/_/g, " ");
   }
-  function Problem(val){
-    $('.alert').html(val).show();
+
+  /**
+   * アラートを一定時間出して消す
+   * @param {string} val
+   */
+  function Problem(val) {
+    $(".alert")
+      .html(val)
+      .show();
     var timeoutid = setTimeout(function() {
-      $('.alert').slideUp(400)
-    }, 3000 );
-
+      $(".alert").slideUp(400);
+    }, 3000);
   }
 
-  // Bitly APIにリクエスト
+  /**
+   * Bitly APIにリクエスト
+   * @param {string} url
+   */
   function convertBitly(url) {
     var encUrl = encodeURIComponent(url);
-    var bitly = "https://api-ssl.bitly.com/v3/shorten?access_token="+use_bitly_access_token+"&longUrl=" + encUrl + "&domain=" + use_bitly_domain;
+    var bitly =
+      "https://api-ssl.bitly.com/v3/shorten?access_token=" +
+      use_bitly_access_token +
+      "&longUrl=" +
+      encUrl +
+      "&domain=" +
+      use_bitly_domain;
 
     var d = new $.Deferred();
 
@@ -188,67 +277,34 @@ $(function() {
     return d.promise();
   }
 
-  //履歴
-  $('.history').on("click", function() {
-    historyListShow();
-  });
-  $('.back').on("click", function() {
-    // $('.history-list').hide();
-    // $('.back').hide();
-    // $('.history-clear').hide();
-    // $('.history').show();
-    // $('.qr').show();
-    // $('.textarea').show();
-    // $('.bitly').show();
-    // $('.option').hide();
-    if(url_val != $('textarea').val()){
-      // $('.copy').show();
-    }
-    $('.contets_inline').removeClass('history');
-  });
-  $(document).on('click', '.history-list li', function() {
-    // $('.history-list').hide();
-    // $('.back').hide();
-    // $('.history-clear').hide();
-    // $('.history').show();
-    // $('.qr').show();
-    // $('.textarea').show();
-    // $('.bitly').show();
-    // $('.copy').show();
-    // $('.option').hide();
-    var url_val = $(this).data('obj');
-    $('textarea').val(url_val);
-    drawQr(encodeURI($('textarea').val()));
-    $('.contets_inline').removeClass('history');
-  })
-
-
-
+  /**
+   * 履歴を表示
+   */
   function historyListShow() {
-    $('.contets_inline').addClass('history');
-    $('.history-list').show();
-    $('.back').show();
-    $('.history-clear').show();
-    // $('.history').hide();
-    // $('.qr').hide();
-    // $('.textarea').hide();
-    // $('.bitly').hide();
-    // $('.copy').hide();
-    // $('.undo').hide();
-    $('.option').show();
     var historyListObj = histryLoad();
     historyListObj.reverse();
     if (historyListObj) {
-      $('.history-list ul').html('');
+      $(".history-list ul").html("");
       for (var item in historyListObj) {
-        $('.history-list ul').append('<li data-obj="' + historyListObj[item].url + '"><dl><dt>' + historyListObj[item].title + '</dt><dd>'+historyListObj[item].url+'</dd></dl></li>')
+        $(".history-list ul").append(
+          '<li data-obj="' +
+            historyListObj[item].url +
+            '"><dl><dt>' +
+            historyListObj[item].title +
+            "</dt><dd>" +
+            historyListObj[item].url +
+            "</dd></dl></li>"
+        );
       }
     }
   }
 
-
+  /**
+   * ローカルストレージから履歴をロードする
+   * @return {object} 履歴の配列
+   */
   function histryLoad() {
-    var getjson = localStorage.getItem('qrcodeextensions12345');
+    var getjson = localStorage.getItem("qrcodeextensions12345");
     if (getjson) {
       var historyListObj = JSON.parse(getjson);
       console.log(historyListObj);
@@ -258,48 +314,39 @@ $(function() {
     }
   }
 
-  function historySave(url,title) {
+  /**
+   * ローカルストレージに履歴を保存する
+   * @param {string} url
+   * @param {string} title
+   */
+  function historySave(url, title) {
     var historyListObj = histryLoad();
     var array = [];
-    console.log("historyListObj", historyListObj)
+    console.log("historyListObj", historyListObj);
     var sameURL = false;
     if (historyListObj) {
       for (var item in historyListObj) {
-        array.push({url:historyListObj[item].url,title:historyListObj[item].title,date:historyListObj[item].date});
+        array.push({
+          url: historyListObj[item].url,
+          title: historyListObj[item].title,
+          date: historyListObj[item].date
+        });
         if (url == historyListObj[item].url) {
           sameURL = true;
         }
       }
     }
     if (!sameURL) {
-      array.push({url:url,title:title,date:new Date()});
+      array.push({
+        url: url,
+        title: title,
+        date: new Date()
+      });
     }
     if (30 < array.length) {
       array.shift();
     }
     var setjson = JSON.stringify(array);
-    localStorage.setItem('qrcodeextensions12345', setjson);
+    localStorage.setItem("qrcodeextensions12345", setjson);
   }
-
-
-  $('.option').on('click',function(){
-    if (chrome.runtime.openOptionsPage) {
-      chrome.runtime.openOptionsPage();
-    } else {
-      window.open(chrome.runtime.getURL('options.html'));
-    }
-  })
-
-
-  var ps = new PerfectScrollbar('.history-list', {
-    // wheelSpeed: 2,
-    // wheelPropagation: true,
-    // minScrollbarLength: 20
-  });
-
-
-
-
-
-
-})
+});
