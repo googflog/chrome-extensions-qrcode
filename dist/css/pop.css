@@ -153,6 +153,7 @@ button.bitly {
 .qr_wrap {
   position: relative;
   cursor: pointer;
+  background: #fff;
   margin-bottom: 10px; }
   .qr_wrap:hover .download {
     visibility: visible;
@@ -237,7 +238,7 @@ button.bitly {
     .history-list li:hover {
       color: white;
       background: #f1a949;
-      background: #ccc; }
+      background: rgba(0, 0, 0, 0.2); }
       .history-list li:hover dl dt {
         color: #fff; }
       .history-list li:hover dl dd {
@@ -265,6 +266,27 @@ button.bitly {
   outline: 0;
   tap-highlight-color: rgba(0, 0, 0, 0);
   line-height: 1em; }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #232323;
+    color: #fff; }
+  a {
+    color: #fff; }
+  .qr textarea {
+    color: #fff; }
+  button.history,
+  button {
+    background: transparent; }
+    button.history:hover,
+    button:hover {
+      background: transparent !important; }
+  ::-moz-selection {
+    color: #000;
+    background: yellow; }
+  ::selection {
+    color: #000;
+    background: yellow; } }
 
 body {
   width: 100%; }

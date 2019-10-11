@@ -101,6 +101,13 @@ textarea {
   -o-transition: all 200ms ease-out;
   transition: all 200ms ease-out; }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #232323;
+    color: #fff; }
+  a {
+    color: #fff; } }
+
 body {
   width: 100%; }
 
@@ -113,13 +120,13 @@ body .option {
   font-size: 17px;
   line-height: 3em;
   margin: 0 auto; }
-  body .option h1 {
-    margin: 1.5em 0 0.7em;
+  body .option .app_ttl {
+    margin: 1.5em 0 0;
     border-bottom: 1px solid #fff;
     font-weight: 200;
     height: 75px; }
-    body .option h1 .version {
-      color: rgba(102, 102, 102, 0.2);
+    body .option .app_ttl .version {
+      opacity: 0.7;
       font-weight: 100;
       font-size: 15px;
       margin-left: 0.5em; }
@@ -135,18 +142,20 @@ body .option {
     fill: none;
     stroke: #000; }
   body .option input {
-    margin-left: 30px; }
+    margin-left: 20px; }
   body .option form {
     padding: 1em 0; }
-  body .option input[type=text] {
+  body .option input[type="text"] {
     width: 380px;
     padding: 1em; }
-    body .option input[type=text]::-moz-selection {
+    body .option input[type="text"]::-moz-selection {
       color: #fff;
       background: #f1a949; }
-    body .option input[type=text]::selection {
+    body .option input[type="text"]::selection {
       color: #fff;
       background: #f1a949; }
+  body .option input[type="radio"] {
+    margin-right: 10px; }
   body .option label {
     cursor: pointer;
     -webkit-user-select: none;
@@ -162,11 +171,6 @@ body .note {
   letter-spacing: 0.1em;
   text-indent: -1.5em;
   padding-left: 1.5em; }
-
-body h3 svg {
-  width: 15px;
-  height: 15px;
-  margin-right: 10px; }
 
 body .history-clear {
   display: -webkit-box;

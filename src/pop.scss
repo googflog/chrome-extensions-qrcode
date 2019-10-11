@@ -1,7 +1,7 @@
 @charset "UTF-8";
-@import 'formObject';
-@import '_pop_qr';
-@import '_pop_history';
+@import "formObject";
+@import "_pop_qr";
+@import "_pop_history";
 
 * {
   margin: 0;
@@ -11,6 +11,32 @@
   tap-highlight-color: rgba(0, 0, 0, 0);
   line-height: 1em;
   // transition: all 200ms ease-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #232323;
+    color: #fff;
+  }
+  a {
+    color: #fff;
+  }
+  .qr {
+    textarea {
+      color: #fff;
+    }
+  }
+  button.history,
+  button {
+    background: transparent;
+    &:hover {
+      background: transparent !important;
+    }
+  }
+  &::selection {
+    color: #000;
+    background: yellow;
+  }
 }
 
 body {
@@ -59,7 +85,7 @@ body {
         transform: translateX(-276px);
       }
     }
-    .qr{
+    .qr {
       textarea {
         width: calc(256px - 0.2em);
       }

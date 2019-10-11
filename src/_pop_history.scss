@@ -1,13 +1,10 @@
 @charset "UTF-8";
 
-
-
-
 // .back,
 .history-clear {
   display: none;
 }
-.history_block{
+.history_block {
   padding: 10px 10px 43px 10px;
   width: 160px;
   width: 100%;
@@ -26,7 +23,7 @@
     overflow: hidden;
     text-align: left;
     word-wrap: normal;
-    border-bottom: 1px solid rgba($TEXTCOLOR,0.2);
+    border-bottom: 1px solid rgba($TEXTCOLOR, 0.2);
     line-height: 1.2em;
     cursor: pointer;
 
@@ -37,7 +34,7 @@
     &:hover {
       color: white;
       background: $SELECTCOLR;
-      background: #ccc;
+      background: rgba(0, 0, 0, 0.2);
 
       dl {
         dt {
@@ -45,7 +42,7 @@
         }
 
         dd {
-          color: rgba(#fff,0.6);
+          color: rgba(#fff, 0.6);
         }
       }
     }
@@ -66,7 +63,7 @@
       dd {
         margin-top: 0.5em;
         font-size: 7px;
-        color: rgba($TEXTCOLOR,0.5);
+        color: rgba($TEXTCOLOR, 0.5);
       }
     }
   }

@@ -1,19 +1,15 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extName__",
-  "version": "1.6",
+  "version": "1.7",
   "browser_action": {
     "default_icon": {
-        "19": "images/icon19.png"
+      "19": "images/icon19.png"
     },
     "default_popup": "popup.html"
   },
   "options_page": "options.html",
   "default_locale": "ja",
-  "permissions": [
-    "tabs",
-    "clipboardWrite",
-    "storage"
-  ],
-  "content_security_policy":"script-src 'self' https://api-ssl.bitly.com; object-src 'self'"
+  "permissions": ["tabs", "clipboardWrite", "storage"],
+  "content_security_policy": "script-src 'self' https://api-ssl.bitly.com; object-src 'self'"
 }

@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import 'formObject';
+@import "formObject";
 
 * {
   margin: 0;
@@ -11,6 +11,17 @@
   transition: all 200ms ease-out;
 }
 
+// ダークモード
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #232323;
+    color: #fff;
+  }
+  a {
+    color: #fff;
+  }
+}
+
 body {
   width: 100%;
 }
@@ -20,72 +31,68 @@ body {
   padding: 10px;
 }
 
-
 body {
-	// background: #333;
-	// color: #fff;
+  // background: #333;
+  // color: #fff;
 
-	.option {
-		h1 {
-			margin: 1.5em 0 0.7em;
-			// color: #fff;
-			border-bottom: 1px solid #fff;
-			font-weight: 200;
-			height: 75px;
+  .option {
+    .app_ttl {
+      margin: 1.5em 0 0;
+      border-bottom: 1px solid #fff;
+      font-weight: 200;
+      height: 75px;
 
-			.version {
-				color: rgba($TEXTCOLOR,0.2);
-				font-weight: 100;
-				font-size: 15px;
+      .version {
+        opacity: 0.7;
+        font-weight: 100;
+        font-size: 15px;
         margin-left: 0.5em;
-			}
-		}
-		// text-shadow: 1px 1px 1px #000;
-		max-width: 500px;
-		font-size: 17px;
-		line-height: 3em;
-		margin: 0 auto;
+      }
+    }
+    max-width: 500px;
+    font-size: 17px;
+    line-height: 3em;
+    margin: 0 auto;
 
-		.checkboxBlock {
-			position: relative;
-			height: 60px;
-		}
-    .group{
+    .checkboxBlock {
+      position: relative;
+      height: 60px;
+    }
+    .group {
       padding: 50px 0;
       font-size: 12px;
     }
-    .group-ttl{
+    .group-ttl {
       font-size: 15px;
       margin-bottom: 20px;
       fill: none;
       stroke: #000;
     }
-		input {
-			// display: none;
-      margin-left: 30px;
-		}
-    form{
+    input {
+      margin-left: 20px;
+    }
+    form {
       padding: 1em 0;
     }
-    input[type=text]{
+    input[type="text"] {
       width: 380px;
       padding: 1em;
-      &::selection{
+      &::selection {
         color: #fff;
         background: $SELECTCOLR;
       }
     }
-
-
-		label {
-			// padding-left: 30px;
-			cursor: pointer;
-			user-select: none;
-			// font-size: 19px;
-			font-weight: 100;
-		}
-	}
-  .note{
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+    label {
+      // padding-left: 10px;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 100;
+    }
+  }
+  .note {
     margin-top: 2em;
     line-height: 1.6em;
     font-size: 12px;
@@ -93,16 +100,8 @@ body {
     text-indent: -1.5em;
     padding-left: 1.5em;
   }
-  h3{
-    svg{
-      width: 15px;
-      height: 15px;
-      margin-right: 10px;
-    }
-  }
-  
-  .history-clear{
+
+  .history-clear {
     display: flex;
   }
-  
 }

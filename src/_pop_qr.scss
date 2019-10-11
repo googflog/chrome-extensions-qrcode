@@ -3,8 +3,8 @@
 button.history {
   background: #ccc;
   border: 1px solid #ccc;
-    line-height: 0;
-    font-size: 0;
+  line-height: 0;
+  font-size: 0;
 
   .st0 {
     fill: none;
@@ -72,7 +72,7 @@ button.bitly {
   }
   // position: relative;
   .download {
-    box-shadow: 0 0 0 3px rgba(white,1);
+    box-shadow: 0 0 0 3px rgba(white, 1);
     opacity: 0;
     position: absolute;
     bottom: 0;
@@ -94,6 +94,7 @@ button.bitly {
 .qr_wrap {
   position: relative;
   cursor: pointer;
+  background: #fff;
   // display: flex;
   // flex-direction: column;
   // justify-content: center; /* 子要素をflexboxにより中央に配置する */
@@ -125,7 +126,7 @@ button.bitly {
   transition: all 0 ease 0;
 
   &:hover {
-    box-shadow: 0 0 0 1px rgba($TEXTCOLOR,0.5);
+    box-shadow: 0 0 0 1px rgba($TEXTCOLOR, 0.5);
     //
     // .download {
     //   opacity: 1;
