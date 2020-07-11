@@ -1,8 +1,11 @@
 {
-   "extName": {
-      "message": "Quick Get QR & Short URL"
-   },
-   "optionNote": {
-      "message": "！注意！ 如果清除浏览器的cookie和缓存数据，[访问令牌]设置也将被删除。"
-   }
+  "extName": {
+    "message": "Quick Get QR & Short URL"
+  },
+  "optionNote": {
+    "message": "！注意！ 如果清除浏览器的cookie和缓存数据，[访问令牌]设置也将被删除。"
+  },
+  "create_qr_context": {
+    "message": "创建QR"
+  }
 }

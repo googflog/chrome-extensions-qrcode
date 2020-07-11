@@ -1,8 +1,11 @@
 {
-   "extName": {
-      "message": "Obtención rápida de QR y URL corta"
-   },
-   "optionNote": {
-      "message": "! Precaución Si borra la cookie y los datos en caché del navegador, también se borrará la configuración [Token de acceso]."
-   }
+  "extName": {
+    "message": "Obtención rápida de QR y URL corta"
+  },
+  "optionNote": {
+    "message": "! Precaución Si borra la cookie y los datos en caché del navegador, también se borrará la configuración [Token de acceso]."
+  },
+  "create_qr_context": {
+    "message": "Crear QR"
+  }
 }

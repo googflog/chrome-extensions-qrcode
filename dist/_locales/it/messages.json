@@ -1,8 +1,11 @@
 {
-   "extName": {
-      "message": "Ottieni rapido QR e URL breve"
-   },
-   "optionNote": {
-      "message": "! Attenzione! Se si cancellano i cookie e i dati memorizzati nella cache del browser, verrà cancellata anche l'impostazione [Token di accesso]."
-   }
+  "extName": {
+    "message": "Ottieni rapido QR e URL breve"
+  },
+  "optionNote": {
+    "message": "! Attenzione! Se si cancellano i cookie e i dati memorizzati nella cache del browser, verrà cancellata anche l'impostazione [Token di accesso]."
+  },
+  "create_qr_context": {
+    "message": "Crea QR"
+  }
 }

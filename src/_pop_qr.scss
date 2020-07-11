@@ -161,3 +161,27 @@ button.bitly {
 .copy {
   display: none;
 }
+
+.app_ttl {
+  display: none;
+}
+.context_mode {
+  display: block;
+  .app_ttl {
+    font-size: 1.8em;
+    width: 276px;
+    margin: auto;
+    margin-top: 50px;
+    display: block;
+    border-bottom: none;
+    text-align: center;
+    .version {
+      margin: 0;
+      margin-top: 0.3em;
+      display: block;
+    }
+  }
+  .contets {
+    margin: auto;
+  }
+}

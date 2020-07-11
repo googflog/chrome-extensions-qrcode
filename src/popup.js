@@ -1,6 +1,8 @@
 $(function() {
   var url_val;
 
+  var from_context = getQueryString();
+
   /**
    * 初期値のアクセストークン
    */
@@ -19,7 +21,7 @@ $(function() {
   chrome.storage.sync.get(
     {
       bitly_access_token: "",
-      bitly_domain: "bit.ly"
+      bitly_domain: "bit.ly",
       // 保存された値があったら使う
     },
     function(items) {
@@ -34,16 +36,36 @@ $(function() {
     }
   );
 
+  $(".version").append(chrome.runtime.getManifest().version);
+
   //ロード時QR表示
-  if (chrome.tabs) {
+
+  const $textarea = $("textarea");
+  const $contets = $(".contets");
+  const $body = $("body");
+  if (from_context.url) {
+    // contextから
+    const url = from_context.url;
+    const title = from_context.title;
+    drawQr(url);
+    $textarea.val(url);
+    historySave(url, title);
+    $contets.addClass("expansion");
+    $body.addClass("context_mode");
+  } else if (chrome.tabs) {
+    // popから
     chrome.tabs.getSelected(null, function(tab) {
-      drawQr(tab.url);
-      $("textarea").val(decodeURI(tab.url));
-      historySave($("textarea").val(), tab.title);
+      const url = decodeURIComponent(tab.url);
+      const title = tab.title;
+      drawQr(url);
+      $textarea.val(url);
+      historySave(url, title);
     });
   } else {
-    $("#qr").qrcode(window.location.href);
-    $("textarea").val(decodeURI(window.location.href));
+    // historyから
+    const url = decodeURIComponent(window.location.href);
+    $("#qr").qrcode(url);
+    $textarea.val(url);
   }
 
   //QRコードを拡大
@@ -272,7 +294,7 @@ $(function() {
       processData: false,
       contentType: false,
       success: d.resolve,
-      error: d.reject
+      error: d.reject,
     });
     return d.promise();
   }
@@ -329,7 +351,7 @@ $(function() {
         array.push({
           url: historyListObj[item].url,
           title: historyListObj[item].title,
-          date: historyListObj[item].date
+          date: historyListObj[item].date,
         });
         if (url == historyListObj[item].url) {
           sameURL = true;
@@ -340,7 +362,7 @@ $(function() {
       array.push({
         url: url,
         title: title,
-        date: new Date()
+        date: new Date(),
       });
     }
     if (30 < array.length) {
@@ -348,5 +370,26 @@ $(function() {
     }
     var setjson = JSON.stringify(array);
     localStorage.setItem("qrcodeextensions12345", setjson);
+  }
+
+  /**
+   * クエリストリング（URLパラメータ）をパースして返す
+   * @returns {Object} `{name: value, ...}`にパースする
+   */
+  function getQueryString() {
+    let result = {};
+
+    if (1 < document.location.search.length) {
+      let query = document.location.search.substring(1);
+      let parameters = query.split("&");
+
+      for (let i = 0, len = parameters.length; i < len; i++) {
+        let element = parameters[i].split("=");
+        let paramName = decodeURIComponent(element[0]);
+        let paramValue = decodeURIComponent(element[1]);
+        result[paramName] = decodeURIComponent(paramValue);
+      }
+    }
+    return result;
   }
 });

@@ -58,12 +58,46 @@
 
       dt {
         font-size: 11px;
+        line-height: 1.6em;
       }
 
       dd {
         margin-top: 0.5em;
         font-size: 7px;
+        line-height: 1.8em;
         color: rgba($TEXTCOLOR, 0.5);
+      }
+    }
+  }
+}
+
+// ダークモード
+@media (prefers-color-scheme: dark) {
+  .history-list {
+    li {
+      border-bottom: 1px solid rgba(white, 0.2);
+      &:hover {
+        color: white;
+        background: $SELECTCOLR;
+        background: rgba(0, 0, 0, 0.2);
+
+        dl {
+          dt {
+            color: #fff;
+          }
+
+          dd {
+            color: rgba(#fff, 0.6);
+          }
+        }
+      }
+
+      dl {
+        dd {
+          margin-top: 0.5em;
+          font-size: 7px;
+          color: rgba(white, 0.3);
+        }
       }
     }
   }
