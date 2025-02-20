@@ -32,17 +32,17 @@
     }
 
     &:hover {
-      color: white;
+      // color: white;
       background: $SELECTCOLR;
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.1);
 
       dl {
         dt {
-          color: #fff;
+          // color: #fff;
         }
 
         dd {
-          color: rgba(#fff, 0.6);
+          // color: rgba(#fff, 0.6);
         }
       }
     }
@@ -63,9 +63,9 @@
 
       dd {
         margin-top: 0.5em;
-        font-size: 7px;
-        line-height: 1.8em;
-        color: rgba($TEXTCOLOR, 0.5);
+        font-size: 9px;
+        line-height: 1.6em;
+        color: $TEXTCOLOR;
       }
     }
   }

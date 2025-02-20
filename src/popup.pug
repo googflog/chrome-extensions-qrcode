@@ -9,7 +9,6 @@ html
   link(rel="stylesheet" href="css/pop.css")
 
  body
-  //TODO: 旧拡張を入れて履歴を残して新型を入れテストする
 
   h1.app_ttl Quick Get QR & Short URL
       span.version ver.
@@ -22,19 +21,12 @@ html
           #qr
           a.download.button(href="#" download="#" title="Download")
             +download
-            //- span.icon-folder-download(title="QR Download")
         .alert
         .textarea
          textarea.url(name="url")
         .ctrl
-          button.undo(title="Undo")
-            +undo
-          button.option(title="Option")
-            +option
           button.history(title="History")
             +history
-
-
 
        .history_block
          .history-list
@@ -43,13 +35,9 @@ html
          .ctrl
            button.back(title="Back")
              +arrow
-           button.option(title="Option")
-             +option
-
 
   script(src="lib/jquery.min.js")
   script(src="lib/jquery.qrcode.min.js")
   script(src="lib/perfect-scrollbar.min.js")
   script(src="lib/encoding.js")
-  script(src="js/_history.js")
   script(src="js/popup.js")

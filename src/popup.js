@@ -59,32 +59,11 @@ $(function () {
         console.log("EN", str);
         drawQr(encodeURI(str));
       }
-      $(".copy").show();
     }, 300);
   });
 
   $("textarea").on("click", function (e) {
     $(this).addClass("click-open");
-  });
-
-  //元のURLに戻す
-  $(".undo").on("click", function () {
-    $("textarea").val(url_val);
-    drawQr(encodeURI($("textarea").val()));
-    $(".bitly").show();
-    $(".undo").hide();
-    $(".url").removeClass("bit-mode");
-
-    $(".copy").hide();
-  });
-
-  //URLコピー
-  $(".copy").on("click", function () {
-    if (execCopy($("textarea").val())) {
-      Problem("COPYED!");
-    } else {
-      Problem("COPY FAILURE!");
-    }
   });
 
   // 履歴表示ボタン
@@ -119,11 +98,7 @@ $(function () {
     }
   });
 
-  var ps = new PerfectScrollbar(".history-list", {
-    // wheelSpeed: 2,
-    // wheelPropagation: true,
-    // minScrollbarLength: 20
-  });
+  new PerfectScrollbar(".history-list");
 
   /**
    * QRを描画
@@ -134,13 +109,15 @@ $(function () {
     $("#qr").qrcode({ width: 1000, height: 1000, text: val });
 
     //ドメインだけ取り出し
-    var dluseurl = val.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
+    const urlToValidFilename = val.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1].replace(/\./g, "_");
 
     //画像ダウンロード用に変換
-    var time = getDate();
-    var imgData = $("canvas")[0].toDataURL();
+    const time = getDate();
+    //画像データを取得
+    const imgData = $("canvas")[0].toDataURL();
+
     $(".download").attr("href", imgData);
-    $(".download").attr("download", "qr-" + time + "-" + dluseurl + ".png");
+    $(".download").attr("download", "qr_" + time + "_" + urlToValidFilename + ".png");
   }
 
   /**
@@ -155,52 +132,6 @@ $(function () {
     var minutes = dt.getMinutes().toString();
     var seconds = dt.getSeconds().toString();
     return year + month + date + hours + minutes + seconds;
-  }
-
-  /**
-   * フォームの内容をクリップボードにコピー
-   * @param {string} string
-   */
-  function execCopy(string) {
-    // 空div 生成
-    var tmp = document.createElement("div");
-    // 選択用のタグ生成
-    var pre = document.createElement("pre");
-
-    // 親要素のCSSで user-select: none だとコピーできないので書き換える
-    pre.style.webkitUserSelect = "auto";
-    pre.style.userSelect = "auto";
-
-    tmp.appendChild(pre).textContent = string;
-
-    // 要素を画面外へ
-    var s = tmp.style;
-    s.position = "fixed";
-    s.right = "200%";
-
-    // body に追加
-    document.body.appendChild(tmp);
-    // 要素を選択
-    document.getSelection().selectAllChildren(tmp);
-
-    // クリップボードにコピー
-    var result = document.execCommand("copy");
-
-    // 要素削除
-    document.body.removeChild(tmp);
-
-    return result;
-  }
-
-  /**
-   * アラートを一定時間出して消す
-   * @param {string} val
-   */
-  function Problem(val) {
-    $(".alert").html(val).show();
-    var timeoutid = setTimeout(function () {
-      $(".alert").slideUp(400);
-    }, 3000);
   }
 
   /**
