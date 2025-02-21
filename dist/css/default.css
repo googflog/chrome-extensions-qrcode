@@ -1,0 +1,115 @@
+/* ベースレイアウト */
+:root {
+  --accent-color: #f1a949;
+
+  --hover-color: rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.3);
+  --text-color: #000;
+  /* オプション */
+  --option-bg-color: #ccc;
+  /* テキストエリア */
+  --textarea-color: rgba(0, 0, 0, 0.1);
+  --text-selection-color: yellow;
+  --text-selection-text-color: #000;
+  /* ボタン */
+  --btn-stroke-color: #fff;
+  --btn-stroke-hover-color: #232323;
+  --btn-bg-color: #ccc;
+  --btn-border-color: #ccc;
+  --btn-bg-hover-color: #fff;
+  --btn-border-hover-color: #232323;
+  --btn-download-bg-color: #ccc;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #fff;
+    /* オプション */
+    --option-bg-color: #232323;
+    /* テキストエリア */
+    --textarea-color: rgba(0, 0, 0, 0.1);
+    /* ボタン */
+    --btn-stroke-color: #fff;
+    --btn-stroke-hover-color: #232323;
+
+    --btn-border-color: #ccc;
+    --btn-border-hover-color: #fff;
+
+    --btn-bg-color: transparent;
+    --btn-bg-hover-color: #fff;
+  }
+}
+/* リセット */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+  tap-highlight-color: transparent;
+  line-height: 1;
+  color: var(--text-color);
+}
+
+/* 共通ボタンスタイル */
+.button {
+  width: 33px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: var(--btn-bg-color);
+  border: 1px solid var(--btn-border-color);
+  border-radius: 50%;
+  stroke: var(--btn-stroke-color);
+  cursor: pointer;
+  font-size: 0;
+  line-height: 0;
+  text-decoration: none;
+
+  span {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 14px;
+    height: 14px;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  &:enabled {
+    .st0 {
+      fill: none;
+      stroke: var(--btn-stroke-color);
+    }
+
+    &:hover {
+      background: var(--btn-bg-hover-color);
+      border-color: var(--btn-border-hover-color);
+
+      .st0 {
+        stroke: var(--btn-stroke-hover-color);
+      }
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+/* アプリタイトル */
+.app_ttl {
+  margin: 1.5em 0 0;
+  font-weight: 200;
+  height: 75px;
+
+  .version {
+    opacity: 0.7;
+    font-weight: 100;
+    font-size: 15px;
+    margin-left: 0.5em;
+  }
+}
