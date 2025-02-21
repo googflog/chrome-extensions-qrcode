@@ -1,7 +1,5 @@
 $(function () {
-  var url_val;
-
-  var from_context = getQueryString();
+  const from_context = getQueryString();
 
   $(".version").append(chrome.runtime.getManifest().version);
 
@@ -46,11 +44,11 @@ $(function () {
   });
 
   //キーボードでURLを修正した
-  var timeoutid;
+  let timeoutid;
   $(".url-textarea").on("keydown", function (e) {
     clearTimeout(timeoutid);
     timeoutid = setTimeout(function () {
-      var str = $(".url-textarea").val().toString();
+      const str = $(".url-textarea").val().toString();
       if (str.match(/[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]/)) {
         console.log("JP", str);
         str = Encoding.convert(str, "SJIS");
@@ -83,7 +81,7 @@ $(function () {
 
   // 履歴リスト
   $(document).on("click", ".history-list li", function () {
-    var url_val = $(this).data("obj");
+    const url_val = $(this).data("obj");
     $(".url-textarea").val(url_val);
     drawQr(encodeURI($(".url-textarea").val()));
     $(".contets-inline").removeClass("is-history");
@@ -124,13 +122,13 @@ $(function () {
    * 日付取得
    */
   function getDate() {
-    var dt = new Date();
-    var year = dt.getFullYear().toString();
-    var month = (dt.getMonth() + 1).toString();
-    var date = dt.getDate().toString();
-    var hours = dt.getHours().toString();
-    var minutes = dt.getMinutes().toString();
-    var seconds = dt.getSeconds().toString();
+    const dt = new Date();
+    const year = dt.getFullYear().toString();
+    const month = (dt.getMonth() + 1).toString();
+    const date = dt.getDate().toString();
+    const hours = dt.getHours().toString();
+    const minutes = dt.getMinutes().toString();
+    const seconds = dt.getSeconds().toString();
     return year + month + date + hours + minutes + seconds;
   }
 
@@ -138,11 +136,11 @@ $(function () {
    * 履歴を表示
    */
   function historyListShow() {
-    var historyListObj = histryLoad();
+    const historyListObj = histryLoad();
     historyListObj.reverse();
     if (historyListObj) {
       $(".history-list ul").html("");
-      for (var item in historyListObj) {
+      for (const item in historyListObj) {
         $(".history-list ul").append('<li data-obj="' + historyListObj[item].url + '"><dl><dt>' + historyListObj[item].title + "</dt><dd>" + historyListObj[item].url + "</dd></dl></li>");
       }
     }
@@ -153,9 +151,9 @@ $(function () {
    * @return {object} 履歴の配列
    */
   function histryLoad() {
-    var getjson = localStorage.getItem("qrcodeextensions12345");
+    const getjson = localStorage.getItem("qrcodeextensions12345");
     if (getjson) {
-      var historyListObj = JSON.parse(getjson);
+      const historyListObj = JSON.parse(getjson);
       console.log(historyListObj);
       return historyListObj;
     } else {
@@ -169,12 +167,12 @@ $(function () {
    * @param {string} title
    */
   function historySave(url, title) {
-    var historyListObj = histryLoad();
-    var array = [];
+    const historyListObj = histryLoad();
+    const array = [];
     console.log("historyListObj", historyListObj);
-    var sameURL = false;
+    let sameURL = false;
     if (historyListObj) {
-      for (var item in historyListObj) {
+      for (const item in historyListObj) {
         array.push({
           url: historyListObj[item].url,
           title: historyListObj[item].title,
@@ -195,7 +193,7 @@ $(function () {
     if (30 < array.length) {
       array.shift();
     }
-    var setjson = JSON.stringify(array);
+    const setjson = JSON.stringify(array);
     localStorage.setItem("qrcodeextensions12345", setjson);
   }
 
